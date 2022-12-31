@@ -56,6 +56,36 @@ class LinkedList(object):
         Assume the first position is "1".
         Inserting at position 3 means between
         the 2nd and 3rd elements."""
+        # append the element
+        ll.append(new_element)
+
+        # create a counter to determine position
+        counter = 1
+        # start at the head
+        current = self.head
+        
+        if self.head:
+            # traverse linked list until given position is reached
+            while counter <= position:
+                if counter == position - 1:
+                    tmp_pointer = current.next
+                    current.next = new_element
+                elif counter == position:
+                    current.next = tmp_pointer
+                counter += 1
+                current = current.next
+
+        else:
+            return None
+            
+
+
+
+
+
+        # # Append an element with values and copy pointer of previous element
+        # Change the pointer of previous element to given element
+
         pass
     
     
@@ -81,10 +111,11 @@ print (ll.head.next.next.value)
 # Should also print 3
 print (ll.get_position(3).value)
 
-# # Test insert
-# ll.insert(e4,3)
-# # Should print 4 now
-# print (ll.get_position(3).value)
+# Test insert
+ll.insert(e4,3)
+# Should print 4 now
+print (ll.get_position(3).value)
+
 
 # # Test delete
 # ll.delete(1)
