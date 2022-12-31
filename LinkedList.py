@@ -67,15 +67,15 @@ class LinkedList(object):
         if self.head:
             # Traverse linked list until given position is reached
             while counter <= position:
-                # If on element before the position 
+                # If on element before the position
                 if counter == position - 1:
-                    # copy its pointer in tmp 
+                    # Copy its pointer in tmp
                     tmp_pointer = current.next
-                    # then change its pointer to the new element
+                    # Then change its pointer to the new element
                     current.next = new_element
                 # If on the given position (inserted element)
                 elif counter == position:
-                    # Add a pointer directing pointer of previous element (saved in tmp)
+                    # Add a pointer directing to pointer of previous element (saved in tmp)
                     current.next = tmp_pointer
                 # Add a counter and move to next element
                 counter += 1
@@ -86,7 +86,27 @@ class LinkedList(object):
 
     def delete(self, value):
         """Delete the first node with a given value."""
-        pass
+        # Ensure a head exists
+        if self.head:
+            # Start at the head of the linked list
+            current = self.head
+            # If first element is the one to be deleted
+            if current.value == value:
+                # Configure second element to be the head
+                self.head = current.next
+                return
+
+            # If the element to be deleted is not the first element
+            while True:
+                # Check the if the next element is the one to be deleted
+                if current.next.value == value:
+                    # Change the pointer to the pointer of the next element (skipping the element to be deleted)
+                    current.next = current.next.next
+                    return
+                current = current.next
+        # Error becuase linked list is empty or its head was not configured
+        else:
+            return None
 
 # Test cases
 # Set up some Elements
@@ -112,11 +132,11 @@ ll.insert(e4,3)
 print (ll.get_position(3).value)
 
 
-# # Test delete
-# ll.delete(1)
-# # Should print 2 now
-# print (ll.get_position(1).value)
-# # Should print 4 now
-# print (ll.get_position(2).value)
-# # Should print 3 now
-# print (ll.get_position(3).value)
+# Test delete
+ll.delete(2)
+# Should print 2 now
+print (ll.get_position(1).value)
+# Should print 4 now
+print (ll.get_position(2).value)
+# Should print 3 now
+print (ll.get_position(3).value)
