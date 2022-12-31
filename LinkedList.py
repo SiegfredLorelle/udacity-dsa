@@ -25,7 +25,7 @@ class LinkedList(object):
             current.next = new_element
         else:
             self.head = new_element
-            
+
     def get_position(self, position):
         """Get an element from a particular position.
         Assume the first position is "1".
@@ -48,6 +48,7 @@ class LinkedList(object):
                     return None
             # Return the node/element when given position is reached
             return current
+        # Error because linked list is empty or its head was not configured
         else:
             return None
 
@@ -56,39 +57,33 @@ class LinkedList(object):
         Assume the first position is "1".
         Inserting at position 3 means between
         the 2nd and 3rd elements."""
-        # append the element
+        # Append the new element to the linked list
         ll.append(new_element)
-
-        # create a counter to determine position
+        # Create a counter to determine position
         counter = 1
-        # start at the head
+        # Start at the head
         current = self.head
-        
+        # Ensures an head exists
         if self.head:
-            # traverse linked list until given position is reached
+            # Traverse linked list until given position is reached
             while counter <= position:
+                # If on element before the position 
                 if counter == position - 1:
+                    # copy its pointer in tmp 
                     tmp_pointer = current.next
+                    # then change its pointer to the new element
                     current.next = new_element
+                # If on the given position (inserted element)
                 elif counter == position:
+                    # Add a pointer directing pointer of previous element (saved in tmp)
                     current.next = tmp_pointer
+                # Add a counter and move to next element
                 counter += 1
                 current = current.next
-
+        # Error because linked list is empty or its head was not configured
         else:
             return None
-            
 
-
-
-
-
-        # # Append an element with values and copy pointer of previous element
-        # Change the pointer of previous element to given element
-
-        pass
-    
-    
     def delete(self, value):
         """Delete the first node with a given value."""
         pass
