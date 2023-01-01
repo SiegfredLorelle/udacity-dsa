@@ -15,12 +15,16 @@ class Queue:
         return self.storage[0]
 
     def dequeue(self):
-        return self.storage.pop(0)
+        try:
+            return self.storage.pop(0)
+        except IndexError:
+            return "Error: queue is probably empty"
+
     
 # Setup
 q = Queue(1)
-q.enqueue(2)
-q.enqueue(3)
+# q.enqueue(2)
+# q.enqueue(3)
 
 # Test peek
 # Should be 1
@@ -31,7 +35,7 @@ print(q.peek())
 print(q.dequeue()) 
 
 # Test enqueue
-q.enqueue(4)
+# q.enqueue(4)
 # Should be 2
 print(q.dequeue()) 
 # Should be 3
