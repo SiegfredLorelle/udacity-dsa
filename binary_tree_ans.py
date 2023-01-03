@@ -30,11 +30,14 @@ class BinaryTree(object):
         else:
             if current.left:
                 is_found = self.preorder_search(current.left, find_val)
-                return is_found
-            elif current.right:
+                if is_found:
+                    return is_found
+            if current.right:
                 is_found = self.preorder_search(current.right, find_val)
-                return is_found
-        return False
+                if is_found:
+                    return is_found
+                else:
+                    return False
 
     def preorder_print(self, start, traversal):
         """Helper method - use this to create a 
@@ -51,7 +54,7 @@ tree.root.left.right = Node(5)
 
 # Test search
 # Should be True
-print(tree.search(1))
+print(tree.search(4))
 # Should be False
 print(tree.search(6))
 
