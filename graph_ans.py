@@ -84,9 +84,35 @@ class Graph(object):
         column numbers represent to nodes.
         Store the edge values in each spot,
         and a 0 if no edge exists."""
-        return []
+        adj_matrix = []
+        adj_matrix_index = 0
 
-
+        for node in self.nodes:
+            while True:
+                if node.value != adj_matrix_index:
+                    adj_matrix.append(0)
+                    adj_matrix_index += 1
+                else:
+                    adj_edges = []
+                    adj_edges_index = 0
+                    for node_inner in self.nodes:
+                        while True:
+                            if node_inner.value != adj_edges_index:
+                                adj_edges.append(0)
+                                adj_edges_index += 1
+                            else:
+                                for edge in node_inner.edges:
+                                    if edge.node_from == node and edge.node_to == node_inner:
+                                        adj_edges.append(edge.value)
+                                        break
+                                else:
+                                    adj_edges.append(0)
+                                adj_edges_index += 1
+                                break
+                    adj_matrix.append(adj_edges)
+                    adj_matrix_index += 1
+                    break
+        return [[0]*len(adj_matrix) if not isinstance(element, list) else element for element in adj_matrix]
 
 
 graph = Graph()
