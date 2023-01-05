@@ -84,22 +84,27 @@ class Graph(object):
         column numbers represent to nodes.
         Store the edge values in each spot,
         and a 0 if no edge exists."""
+        # Return Adjacency Matrix when done
         adj_matrix = []
         adj_matrix_index = 0
-
+        # Loop through each node
         for node in self.nodes:
+            # Keep on incrementing the matrix index until it matches with node value
             while True:
                 if node.value != adj_matrix_index:
                     adj_matrix.append(0)
                     adj_matrix_index += 1
+                # When node value matches with matrix index, Create another node loop and edge list
                 else:
                     adj_edges = []
                     adj_edges_index = 0
                     for node_inner in self.nodes:
+                        # Keep on incrementing the edge list index until it matches with inner node vlaue
                         while True:
                             if node_inner.value != adj_edges_index:
                                 adj_edges.append(0)
                                 adj_edges_index += 1
+                            # If inner node value matches with edge list index, append the edge that comes from node and goes to inner node
                             else:
                                 for edge in node_inner.edges:
                                     if edge.node_from == node and edge.node_to == node_inner:
@@ -109,9 +114,11 @@ class Graph(object):
                                     adj_edges.append(0)
                                 adj_edges_index += 1
                                 break
+                    # After finding all edges that comes from node and goes to inner node, append the edge list to adjacency matrix
                     adj_matrix.append(adj_edges)
                     adj_matrix_index += 1
                     break
+        # Return the adj matrix but first, turn the all 0 integers to list full of zeros (0 int comes from index that do not match to node value)
         return [[0]*len(adj_matrix) if not isinstance(element, list) else element for element in adj_matrix]
 
 
