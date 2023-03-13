@@ -180,6 +180,32 @@ class Graph(object):
         self._clear_visited()
         ret_list = [node.value]
         # Your code here
+        # Mark the starting node as visited
+        node.visited = True
+
+        # Loop through each nodes (This is max, may exit the loop early)
+        for index in range(len(self.nodes)):
+            # Set the current node as current index of our node loop
+            current_node = self.find_node(ret_list[index])
+
+            # Loop through each edges
+            for edge in self.edges:
+                # Ignore the edge if it goes to a visited node
+                if edge.node_to.visited:
+                    continue
+                # If the edge comes from the current node
+                elif edge.node_from.value == current_node.value:
+                    # Append the node it goes to into viewed nodes lists
+                    ret_list.append(edge.node_to.value)
+                    # Mark then nodes it goes to as visited
+                    edge.node_to.visited = True
+
+            # After looping through each edges,
+            # Stop loop through the nodes, if all the nodes have been visited
+            # if all([node.visited for node in self.nodes]):
+                # break
+
+        # Return the list of the viewed nodes after loop through the nodes
         return ret_list
 
     def bfs_names(self, start_node_num):
@@ -197,7 +223,7 @@ graph.set_node_names(('Mountain View',     # 0
                         'Shanghai',        # 3
                         'Berlin',          # 4
                         'Sao Paolo',       # 5
-                        'Bangalore'))      # 6 
+                        'Bangalore'))      # 6
 
 graph.insert_edge(51, 0, 1)     # MV <-> SF
 graph.insert_edge(51, 1, 0)     # SF <-> MV
